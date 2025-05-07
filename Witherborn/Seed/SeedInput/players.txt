@@ -1,0 +1,10 @@
+SkyGod123|37|180|1
+DungeonSlayer|45|245|2
+MageMaster|50|300|3
+ArrowRain|41|160|5
+ClutchTank|46|275|1
+HealPlease|38|190|2
+ShadowMage|44|240|3
+JujuFan|36|155|5
+F7Runner|50|350|4
+WiseWizard|39|170|3

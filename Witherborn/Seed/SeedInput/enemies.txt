@@ -1,0 +1,10 @@
+Lost Adventurer|700|1
+Crypt Dreadlord|550|1
+Shadow Assassin|900|1
+Voidgloom Seraph|1200|2
+Watcher|600|1
+Fels|750|1
+Ashfang|1300|2
+Grunt Zombie|300|1
+The Professor|1000|1
+Bonzo|500|1

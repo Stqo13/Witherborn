@@ -1,0 +1,10 @@
+1|Bonzo|1
+2|Scarf|1
+3|The Professor|1
+4|Thorn|1
+5|Livid|1
+6|Sadan|1
+7|Necron|1
+1|Watcher|2
+2|Ashfang|2
+3|Voidgloom Seraph|2

@@ -1,0 +1,5 @@
+Tank|Absorbs damage and protects teammates
+Healer|Restores health and revives teammates
+Mage|Uses mana-based magic attacks
+Berserker|Deals high melee damage
+Archer|Specialized in long-range attacks

@@ -1,0 +1,5 @@
+Catacombs|9|Undead Catacombs
+The Rift|5|Void Realm
+The Crystal Hollows|7|Gemstone Caves
+Spider's Den Crypt|4|Arachnid Tunnels
+The Wither Temple|10|Final Trial

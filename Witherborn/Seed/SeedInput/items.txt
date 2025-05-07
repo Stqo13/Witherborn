@@ -1,0 +1,20 @@
+Storm's Armor|Armor|850
+Wise Dragon Armor|Armor|600
+Necron's Armor|Armor|950
+Goldor's Armor|Armor|900
+Maxor's Armor|Armor|880
+Shadow Assassin Armor|Armor|750
+Frozen Blaze Armor|Armor|700
+Superior Dragon Armor|Armor|800
+Necromancer Lord Armor|Armor|650
+Adaptive Armor|Armor|500
+Hyperion|Weapon|1200
+Giant's Sword|Weapon|1100
+Spirit Sceptre|Weapon|1000
+Valkyrie|Weapon|1150
+Terminator|Weapon|1300
+Juju Shortbow|Weapon|950
+Astraea|Weapon|1050
+Livid Dagger|Weapon|900
+Flower of Truth|Weapon|800
+Bonzo Staff|Weapon|750
