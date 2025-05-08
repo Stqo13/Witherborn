@@ -1,104 +1,49 @@
-﻿using Microsoft.Data.SqlClient.DataClassification;
+﻿using Microsoft.EntityFrameworkCore;
 using Witherborn.Data;
 using Witherborn.Data.Models;
 
 public static class SeedDatabase
 {
-    public static void Seed(WitherbornDbContext context)
+    public static async Task SeedClasses(WitherbornDbContext context)
     {
-        string basePath = AppDomain.CurrentDomain.BaseDirectory;
-        string seedFolder = Path.Combine(basePath, "SeedData");
+        string path = @"../../../SeedInput/classes.txt";
 
-        if (!context.Items.Any())
+        string[] classesInfo = await File.ReadAllLinesAsync(path);
+
+        if (!await context.Classes.AnyAsync())
         {
-            var lines = File.ReadAllLines(Path.Combine(seedFolder, "items.txt"));
-            foreach (var line in lines)
+            foreach (var item in classesInfo)
             {
-                var parts = line.Split('|');
-                context.Items.Add(new Item
+                string[] info = item.Split('|', StringSplitOptions.RemoveEmptyEntries);
+
+                var entity = new Class
                 {
-                    Name = parts[0],
-                    ItemType = parts[1],
-                    Power = int.Parse(parts[2])
-                });
+                    Type = info[0],
+                    Description = info[1]
+                };
+
+                await context.AddAsync(entity);
+                await context.SaveChangesAsync();
             }
         }
-        
-        if (!context.Classes.Any())
+        else
         {
-            var lines = File.ReadAllLines(Path.Combine(seedFolder, "classes.txt"));
-            foreach (var line in lines)
+            throw new ArgumentException("The table classes is already seeded!");
+        }
+    }
+
+    public static async Task SeedDungeons(WitherbornDbContext context)
+    {
+        var path = @"../../../SeedInput/dungeons.txt";
+
+        string[] dungeonsInfo = await File.ReadAllLinesAsync(path);
+
+        if (!await context.Dungeons.AnyAsync())
+        {
+            foreach (var item in dungeonsInfo)
             {
-                var parts = line.Split('|');
-                context.Classes.Add(new Class
-                {
-                    Type = parts[0],
-                    Description = parts[1]
-                });
+                string[] info = item.Split('|', StringSplitOptions.RemoveEmptyEntries);
             }
         }
-
-        if (!context.Players.Any())
-        {
-            var lines = File.ReadAllLines(Path.Combine(seedFolder, "players.txt"));
-            foreach (var line in lines)
-            {
-                var parts = line.Split('|');
-                context.Players.Add(new Player
-                {
-                    Username = parts[0],
-                    CatacombsLevel = int.Parse(parts[1]),
-                    RunCompletions = int.Parse(parts[2]),
-                    ClassId = int.Parse(parts[3])
-                });
-            }
-        }
-
-        if (!context.Dungeons.Any())
-        {
-            var lines = File.ReadAllLines(Path.Combine(seedFolder, "dungeons.txt"));
-            foreach (var line in lines)
-            {
-                var parts = line.Split('|');
-                context.Dungeons.Add(new Dungeon
-                {
-                    Name = parts[0],
-                    DifficultyLevel = int.Parse(parts[1]),
-                    Type = parts[2]
-                });
-            }
-        }
-
-        if (!context.Enemies.Any())
-        {
-            var lines = File.ReadAllLines(Path.Combine(seedFolder, "enemies.txt"));
-            foreach (var line in lines)
-            {
-                var parts = line.Split('|');
-                context.Enemies.Add(new Enemy
-                {
-                    Name = parts[0],
-                    Strength = int.Parse(parts[1]),
-                    DungeonId = int.Parse(parts[2])
-                });
-            }
-        }
-
-        if (!context.Floors.Any())
-        {
-            var lines = File.ReadAllLines(Path.Combine(seedFolder, "floors.txt"));
-            foreach (var line in lines)
-            {
-                var parts = line.Split('|');
-                context.Floors.Add(new Floor
-                {
-                    FloorNumber = int.Parse(parts[0]),
-                    BossName = parts[1],
-                    DungeonId = int.Parse(parts[2])
-                });
-            }
-        }
-
-        context.SaveChanges();
     }
 }
