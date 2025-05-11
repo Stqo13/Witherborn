@@ -43,7 +43,52 @@ public static class SeedDatabase
             foreach (var item in dungeonsInfo)
             {
                 string[] info = item.Split('|', StringSplitOptions.RemoveEmptyEntries);
+
+                var entity = new Dungeon
+                {
+                    Type = info[0],
+                    DifficultyLevel = int.Parse(info[1]),
+                    Name = info[2]
+                };
+
+                await context.AddAsync(entity);
+                await context.SaveChangesAsync();
             }
         }
+        else
+        {
+            throw new ArgumentException("The table dungeons is already seeded!");
+        }
     }
+
+    public static async Task SeedEnemies(WitherbornDbContext context)
+    {
+        string path = @"../../../SeedInput/enemies.txt";
+
+        string[] enemiesInfo = await File.ReadAllLinesAsync(path);
+
+        if (!await context.Enemies.AnyAsync())
+        {
+            foreach (var item in enemiesInfo)
+            {
+                string[] info = item.Split('|', StringSplitOptions.RemoveEmptyEntries);
+
+                var entity = new Enemy
+                {
+                    Name = info[0],
+                    Strength = int.Parse(info[1]),
+                    DungeonId = int.Parse(info[2]),
+                };
+
+                await context.AddAsync(entity);
+                await context.SaveChangesAsync();
+            }
+        }
+        else
+        {
+            throw new ArgumentException("The table enemies is already seeded!");
+        }
+    }
+
+
 }
