@@ -11,7 +11,7 @@ using Witherborn.Data;
 namespace Witherborn.Data.Migrations
 {
     [DbContext(typeof(WitherbornDbContext))]
-    [Migration("20250502083247_InitialMigration")]
+    [Migration("20250511181149_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
