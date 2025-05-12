@@ -1,5 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Witherborn.Data.Models;
 
 namespace Witherborn.Data
@@ -25,7 +24,7 @@ namespace Witherborn.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=STUDENT24;Database=Witherborn;Integrated Security=true;TrustServerCertificate=true;");
+            optionsBuilder.UseSqlServer("Server=DESKTOP-A8P7BPS\\SQLEXPRESS;Database=Witherborn;Integrated Security=true;TrustServerCertificate=true;");
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

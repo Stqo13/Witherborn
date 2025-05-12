@@ -13,11 +13,13 @@ namespace Witherborn
 
             IClassService classService = new ClassService(context);
             IItemService itemService = new ItemService(context);
+            IQueryService queryService = new QueryService(context);
 
             Menu menu = new Menu(
                 context,
                 classService,
-                itemService);
+                itemService,
+                queryService);
 
             await menu.UserInput();
         }
