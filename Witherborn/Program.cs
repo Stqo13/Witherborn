@@ -1,4 +1,6 @@
-﻿using Witherborn.Data;
+﻿using Witherborn.Core.Services.Implementations;
+using Witherborn.Core.Services.Interfaces;
+using Witherborn.Data;
 using Witherborn.Views;
 
 namespace Witherborn
@@ -9,7 +11,14 @@ namespace Witherborn
         {
             WitherbornDbContext context = new WitherbornDbContext();
 
-            Menu menu = new Menu(context);
+            IClassService classService = new ClassService(context);
+            IItemService itemService = new ItemService(context);
+
+            Menu menu = new Menu(
+                context,
+                classService,
+                itemService);
+
             await menu.UserInput();
         }
     }
