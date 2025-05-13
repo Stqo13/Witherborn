@@ -47,53 +47,123 @@ namespace Witherborn.Core.Services.Implementations
         public async Task<IEnumerable<FloorStrongestEnemyDTO>> GetAllFloorsStrongestEnemyAsync()
         {
             var floors = await context.Floors
+                .Include(f => f.Dungeon)
+                .ThenInclude(f => f.Enemies) 
                 .Select(f => new FloorStrongestEnemyDTO
-                {
-                    BossName = f.BossName,
+                {       
                     FloorNumber = f.FloorNumber,
+                    BossName = f.BossName,
                     StrongestEnemy = f.Dungeon.Enemies
                         .OrderByDescending(e => e.Strength)
                         .Select(e => e.Name)
-                        .FirstOrDefault() ?? string.Empty
+                        .FirstOrDefault() ?? "No enemies on this floor"
                 })
                 .ToListAsync();
 
             return floors;
         }
 
-        public Task<IEnumerable<PlayerInfoDTO>> GetAllPlayersByDungeonNameAsync(string dungeonName)
+        public async Task<IEnumerable<PlayerFullStatsDTO>> GetAllPlayersFullStatsAsync()
         {
-            throw new NotImplementedException();
+            var players = await context.Players
+                .Select(p => new PlayerFullStatsDTO
+                {
+                    Username = p.Username,
+                    ClassName = p.Class.Type,
+                    Items = p.PlayerItems
+                        .Select(pi => pi.Item.Name)
+                        .ToList(),
+                    Dungeons = p.PlayerDungeons
+                        .Select(pd => pd.Dungeon.Name)
+                        .ToList()
+                })
+                .ToListAsync();
+
+            return players;
         }
 
-        public Task<IEnumerable<PlayerFullStatsDTO>> GetAllPlayersFullStatsAsync()
+        public async Task<IEnumerable<DungeonsPlayerCountDTO>> GetDungeonPlayerCountsAsync()
         {
-            throw new NotImplementedException();
+            var count = await context.Dungeons
+                .Select(d => new DungeonsPlayerCountDTO
+                {
+                    DungeonName = d.Name,
+                    PlayerCount = d.PlayerDungeons.Count
+                })
+                .ToListAsync();
+
+            return count;
         }
 
-        public Task<IEnumerable<DungeonsPlayerCountDTO>> GetDungeonPlayerCountsAsync()
+        public async Task<IEnumerable<PlayerItemCountDTO>> GetTopPlayersByUniqueItemsAsync(int topCount)
         {
-            throw new NotImplementedException();
+            var players = await context.Players
+                .Select(p => new PlayerItemCountDTO
+                {
+                    Username = p.Username,
+                    ItemCount = p.PlayerItems.Count()
+                })
+                .OrderByDescending(p => p.ItemCount)
+                .Take(topCount)
+                .ToListAsync();
+
+            return players;
         }
 
-        public Task<IEnumerable<EnemyInfoDTO>> GetEnemiesByMinFloorLevelAsync(int minLevel)
+        public async Task<IEnumerable<PlayerInfoDTO>> GetAllPlayersByDungeonNameAsync(string dungeonName)
         {
-            throw new NotImplementedException();
+            var players = await context.Players
+                .Where(p => p.PlayerDungeons.Any(pd => pd.Dungeon.Name == dungeonName))
+                .Select(p => new PlayerInfoDTO
+                {
+                    Username = p.Username,
+                    CatacombsLevel = p.CatacombsLevel
+                })
+                .ToListAsync();
+
+            return players;
         }
 
-        public Task<IEnumerable<PlayerOverallStatsDTO>> GetPlayerOverallStatsAsync()
+        public async Task<IEnumerable<PlayerOverallStatsDTO>> GetPlayerOverallStatsAsync()
         {
-            throw new NotImplementedException();
+            var players = await context.Players
+                .Select(p => new PlayerOverallStatsDTO
+                {
+                    Username = p.Username,
+                    TotalRuns = p.RunCompletions,
+                    OwnedItems = p.PlayerItems.Count
+                })
+                .ToListAsync();
+
+            return players;
         }
 
-        public Task<IEnumerable<PlayerInfoDTO>> GetPlayersByMinCatacombsLevelAsync(int minLevel)
+        public async Task<IEnumerable<PlayerInfoDTO>> GetPlayersByMinCatacombsLevelAsync(int minLevel)
         {
-            throw new NotImplementedException();
+            var players = await context.Players
+                .Where(p => p.CatacombsLevel >= minLevel)
+                .Select(p => new PlayerInfoDTO
+                {
+                    Username = p.Username,
+                    CatacombsLevel = p.CatacombsLevel
+                })
+                .ToListAsync();
+
+            return players;
         }
 
-        public Task<IEnumerable<PlayerInfoDTO>> GetPlayersByOwnedItemAsync(string itemName)
+        public async Task<IEnumerable<PlayerInfoDTO>> GetPlayersByOwnedItemAsync(string itemName)
         {
-            throw new NotImplementedException();
+            var players = await context.Players
+                .Where(p => p.PlayerItems.Any(pi => pi.Item.Name == itemName))
+                .Select(p => new PlayerInfoDTO
+                {
+                    Username = p.Username,
+                    CatacombsLevel = p.CatacombsLevel
+                })
+                .ToListAsync();
+
+            return players;
         }
     }
 }

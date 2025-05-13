@@ -10,7 +10,7 @@ namespace Witherborn.Core.Services.Interfaces
         Task<IEnumerable<FloorStrongestEnemyDTO>> GetAllFloorsStrongestEnemyAsync();
         Task<IEnumerable<PlayerFullStatsDTO>> GetAllPlayersFullStatsAsync();
         Task<IEnumerable<DungeonsPlayerCountDTO>> GetDungeonPlayerCountsAsync();
-        Task<IEnumerable<EnemyInfoDTO>> GetEnemiesByMinFloorLevelAsync(int minLevel);
+        Task<IEnumerable<PlayerItemCountDTO>> GetTopPlayersByUniqueItemsAsync(int topCount);
         Task<IEnumerable<PlayerOverallStatsDTO>> GetPlayerOverallStatsAsync();
         Task<IEnumerable<PlayerInfoDTO>> GetPlayersByMinCatacombsLevelAsync(int minLevel);
         Task<IEnumerable<PlayerInfoDTO>> GetPlayersByOwnedItemAsync(string itemName);
