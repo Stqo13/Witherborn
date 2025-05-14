@@ -35,7 +35,7 @@ namespace Witherborn.Views
             Console.WriteLine("║ 10 Lists the player's overall stats <Total runs and total owned items count>                                                   ║");
             Console.WriteLine("║ 11 List the players above the minimum Catacombs level -> {Catacombs level}                                                     ║");
             Console.WriteLine("║ 12 Lists the players with the most items owned by a given item name -> {Terminator/Goldor's Armor/Hyperion/Bonzo Staff/etc.}   ║");
-            Console.WriteLine("║ End                                                                                                                            ║");
+            Console.WriteLine("║ 0 Exits the Witherborn                                                                                                         ║");
             Console.WriteLine("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
 
             #endregion
@@ -43,7 +43,7 @@ namespace Witherborn.Views
             string[] input = Console.ReadLine()
                 .Split(" ", StringSplitOptions.RemoveEmptyEntries);
 
-            while (input[0] != "End")
+            while (input[0] != "0")
             {
                 string command = input[0];
 
@@ -57,23 +57,27 @@ namespace Witherborn.Views
                     string entityType = input[1];
                     string operation = input[2];
 
-                    string[] userInput = input[3].Split(' ', StringSplitOptions.RemoveEmptyEntries);
-
                     if (entityType == "Class")
                     {
                         Console.WriteLine("╔═════════════════════════════════════════════════════════════════════════╗");
                         Console.WriteLine("║ Enter UserCommand -> {Add[Type, Description]/Edit[Id, Type]/Delete[Id]} ║");
                         Console.WriteLine("╚═════════════════════════════════════════════════════════════════════════╝");
 
+                        string crudCommand = Console.ReadLine() ?? string.Empty;
+                        string[] userInput = crudCommand.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
                         Console.WriteLine(await classController.ClassOperations(operation, userInput));
                     }
                     else if (entityType == "Item")
                     {
-                        Console.WriteLine("╔════════════════════════════════════════════════════════════════════════╗");
-                        Console.WriteLine("║ Enter UserCommand -> {Ad[Type, Description]/Edit[Id, Type]/Delete[Id]} ║");
-                        Console.WriteLine("╚════════════════════════════════════════════════════════════════════════╝");
+                        Console.WriteLine("╔═════════════════════════════════════════════════════════════════════════════╗");
+                        Console.WriteLine("║ Enter UserCommand -> {Add[Name|ItemType|Power]/Edit[Id|Name]/Delete[Id]}    ║");
+                        Console.WriteLine("╚═════════════════════════════════════════════════════════════════════════════╝");
 
-                        Console.WriteLine(await itemController.ItemOperations(operation,userInput));
+                        string crudCommand = Console.ReadLine() ?? string.Empty;
+                        string[] userInput = crudCommand.Split('|', StringSplitOptions.RemoveEmptyEntries);
+
+                        Console.WriteLine(await itemController.ItemOperations(operation, userInput));
                     }
                 }
                 else if(command == "3")
@@ -145,7 +149,7 @@ namespace Witherborn.Views
                 Console.WriteLine("║ 10 Lists the player's overall stats <Total runs and total owned items count>                                                   ║");
                 Console.WriteLine("║ 11 List the players above the minimum Catacombs level -> {Catacombs level}                                                     ║");
                 Console.WriteLine("║ 12 Lists the players with the most items owned by a given item name -> {Terminator/Goldor's Armor/Hyperion/Bonzo Staff/etc.}   ║");
-                Console.WriteLine("║ End                                                                                                                            ║");
+                Console.WriteLine("║ 0 Exits the Witherborn                                                                                                         ║");
                 Console.WriteLine("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
 
                 #endregion

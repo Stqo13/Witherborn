@@ -12,7 +12,7 @@ namespace Witherborn.Controllers
             if (command == "Add")
             {
                 string type = input[0];
-                string description = input[1];
+                string description = string.Join(" ", input.Skip(1));
 
                 result = await classService.AddClassAsync(type, description);
             }
