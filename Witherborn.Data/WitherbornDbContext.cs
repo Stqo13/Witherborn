@@ -24,7 +24,7 @@ namespace Witherborn.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-P67RBD6\\SQLEXPRESS;Database=Witherborn;Integrated Security=true;TrustServerCertificate=true;");
+            optionsBuilder.UseSqlServer("Server=DESKTOP-A8P7BPS\\SQLEXPRESS;Database=Witherborn;Integrated Security=true;TrustServerCertificate=true;");
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

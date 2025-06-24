@@ -1,6 +1,6 @@
 namespace Witherborn.UI
 {
-    public partial class Form1 
+    public partial class Form1
         : Form
     {
 
@@ -17,7 +17,7 @@ namespace Witherborn.UI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Hide();    
+            this.Hide();
 
             var form2 = new Form2();
             form2.Show();
@@ -35,16 +35,21 @@ namespace Witherborn.UI
         {
             this.Hide();
 
-            //var form4 = new Form4();
-            //form4.Show();
+            var form4 = new Form4();
+            form4.Show();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             this.Hide();
 
-            //var form5 = new Form5();
-            //form5.Show();
+            var form5 = new Form5();
+            form5.Show();
+        }
+
+        private void label1_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }
