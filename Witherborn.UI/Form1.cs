@@ -27,8 +27,8 @@ namespace Witherborn.UI
         {
             this.Hide();
 
-            //var form3 = new Form3();
-            //form3.Show();
+            var form3 = new Form3();
+            form3.Show();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -42,7 +42,6 @@ namespace Witherborn.UI
         private void button4_Click(object sender, EventArgs e)
         {
             this.Hide();
-            this.Close();
 
             //var form5 = new Form5();
             //form5.Show();
